@@ -1,0 +1,2 @@
+import React from 'react';import{Link}from'react-router-dom';import{money}from'../data/cars';
+export default function CarCard({car}){return <article className="car"><img src={car.image} alt={car.model}/><div className="pad"><small>{car.type} · {car.year}</small><h3>{car.brand} {car.model}</h3><p>{car.seats} ที่นั่ง · {car.gear}</p><strong>{money(car.price)} / วัน</strong><p><Link className="btn" to={'/cars/'+car.id}>ดูรายละเอียด</Link></p></div></article>}

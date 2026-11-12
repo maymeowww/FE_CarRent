@@ -1,0 +1,2 @@
+const BASE=process.env.REACT_APP_API_URL||'http://localhost:8080';
+export async function apiRequest(path,options={}){const token=localStorage.getItem('carrent_token');const res=await fetch(BASE+path,{...options,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`} : {}),...(options.headers||{})}});const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.error||'API error');return data;}

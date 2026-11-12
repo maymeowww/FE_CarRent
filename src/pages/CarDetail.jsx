@@ -1,0 +1,2 @@
+import React from'react';import{useParams,Link,Navigate}from'react-router-dom';import{cars,money}from'../data/cars';
+export default function CarDetail(){const{id}=useParams(),c=cars.find(x=>x.id===id);if(!c)return <Navigate to="/cars"/>;return <section className="detail"><img src={c.image}/><div><small>{c.type} · {c.year}</small><h1>{c.brand} {c.model}</h1><p>{c.description}</p><p>{c.seats} ที่นั่ง · {c.gear}</p><h2>{money(c.price)} / วัน</h2><Link className="btn big" to={'/booking/'+c.id}>จองรถคันนี้</Link></div></section>}

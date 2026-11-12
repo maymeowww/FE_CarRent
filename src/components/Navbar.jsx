@@ -1,0 +1,2 @@
+import React from 'react';import{Link,NavLink}from'react-router-dom';import{useAuth}from'../auth/AuthContext';
+export default function Navbar(){const{user,logout}=useAuth();return <header className="nav"><Link className="logo" to="/">CAR<span>RENT</span></Link><nav><NavLink to="/cars">รถทั้งหมด</NavLink>{user&&<NavLink to="/member">บัญชีของฉัน</NavLink>}{user?.role==='admin'&&<NavLink to="/admin">Admin</NavLink>}</nav>{user?<button className="btn light" onClick={logout}>ออกจากระบบ</button>:<Link className="btn" to="/login">เข้าสู่ระบบ</Link>}</header>}
