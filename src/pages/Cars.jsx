@@ -1,3 +1,8 @@
+const register = async (name, email, password) => {
+  await backendApi.register({ name, email, password });
+  return login(email, password); // สมัครเสร็จแล้วล็อกอินต่อเลย
+};
+Jub
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { backendApi } from '../api/backend';
@@ -17,7 +22,8 @@ export default function Cars() {
     setError(null);
     try {
       const data = await backendApi.getCars();
-      setCars(Array.isArray(data) ? data : []);
+      // แก้ที่ 1: backend ตอบ { items: [...] } ไม่ใช่ array ตรงๆ
+      setCars(Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : []);
     } catch (err) {
       setError(err.message || 'Failed to fetch');
     } finally {
@@ -84,16 +90,15 @@ export default function Cars() {
             />
           </div>
 
+          {/* แก้ที่ 2: ค่า type ต้องตรงกับ backend คือ car / motorcycle */}
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
             className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 font-medium focus:outline-none focus:border-[#1d64f2] sm:w-48"
           >
             <option value="ALL">ทุกประเภทรถ</option>
-            <option value="Sedan">รถเก๋ง (Sedan)</option>
-            <option value="SUV">SUV และรถตู้</option>
-            <option value="Scooter">มอเตอร์ไซค์ออโตเมติก</option>
-            <option value="BigBike">บิ๊กไบค์</option>
+            <option value="car">รถยนต์</option>
+            <option value="motorcycle">มอเตอร์ไซค์</option>
           </select>
         </div>
 

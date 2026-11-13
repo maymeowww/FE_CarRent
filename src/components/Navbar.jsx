@@ -7,6 +7,11 @@ export default function Navbar() {
   const auth = useAuth();
   const user = auth?.user;
 
+  // เช็กสิทธิ์ Admin (รองรับทั้ง role และ Role รวมถึงตัวพิมพ์เล็ก/ใหญ่)
+  const isAdmin =
+    (user?.role || user?.Role || '').toLowerCase() === 'admin' ||
+    user?.is_admin === true;
+
   const handleLogout = () => {
     if (auth?.logout) {
       auth.logout();
@@ -42,6 +47,11 @@ export default function Navbar() {
             <NavLink to="/cars" className={navLinkClass}>
               รถของเรา
             </NavLink>
+            {user && (
+              <NavLink to="/my-bookings" className={navLinkClass}>
+                การจองของฉัน
+              </NavLink>
+            )}
             <NavLink to="/api-lab" className={navLinkClass}>
               API Lab
             </NavLink>
@@ -51,13 +61,33 @@ export default function Navbar() {
           </nav>
         </div>
 
-        {/* ฝั่งขวา : ปุ่มเข้าสู่ระบบ และ ปุ่มสมัครสมาชิก */}
+        {/* ฝั่งขวา : เมนูเมื่อล็อกอินแล้ว หรือ ปุ่มเข้าสู่ระบบ/สมัครสมาชิก */}
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              <span className="text-xs font-semibold text-slate-700">
+              {/* ปุ่ม Admin จะแสดงเฉพาะบัญชีที่มี role === 'admin' */}
+              {isAdmin && (
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) =>
+                    `text-xs font-semibold px-3 py-1.5 rounded-lg border transition ${
+                      isActive
+                        ? 'bg-amber-500 text-white border-amber-500'
+                        : 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100'
+                    }`
+                  }
+                >
+                  จัดการระบบ (Admin)
+                </NavLink>
+              )}
+
+              <Link
+                to="/profile"
+                className="text-xs font-semibold text-slate-700 hover:text-[#1d64f2] transition"
+              >
                 {user.name || user.email}
-              </span>
+              </Link>
+
               <button
                 type="button"
                 onClick={handleLogout}
@@ -93,6 +123,16 @@ export default function Navbar() {
         <NavLink to="/cars" className={navLinkClass}>
           รถของเรา
         </NavLink>
+        {user && (
+          <NavLink to="/my-bookings" className={navLinkClass}>
+            การจองของฉัน
+          </NavLink>
+        )}
+        {isAdmin && (
+          <NavLink to="/admin" className={navLinkClass}>
+            Admin
+          </NavLink>
+        )}
         <NavLink to="/api-lab" className={navLinkClass}>
           API Lab
         </NavLink>
