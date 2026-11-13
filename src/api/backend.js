@@ -30,13 +30,13 @@ export const backendApi = {
   getCars: () => request('/api/cars'),
   getCarById: (id) => request(`/api/cars/${id}`),
   createBooking: (bookingData) => request('/api/bookings', { method: 'POST', body: JSON.stringify(bookingData) }),
-  getMyBookings: () => request('/api/bookings/me'),
+  getMyBookings: async () => (await request('/api/bookings/me')).items || [],
   cancelBooking: (id) => request(`/api/bookings/${id}/cancel`, { method: 'PUT' }),
 
   // ส่วนของ Admin
   createCar: (carData) => request('/api/admin/cars', { method: 'POST', body: JSON.stringify(carData) }),
   updateCar: (id, carData) => request(`/api/admin/cars/${id}`, { method: 'PUT', body: JSON.stringify(carData) }),
   deleteCar: (id) => request(`/api/admin/cars/${id}`, { method: 'DELETE' }),
-  getAllBookings: () => request('/api/admin/bookings'),
+  getAllBookings: async () => (await request('/api/admin/bookings')).items || [],
   updateBookingStatus: (id, status) => request(`/api/admin/bookings/${id}`, { method: 'PUT', body: JSON.stringify({ status }) }),
 };
