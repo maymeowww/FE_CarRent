@@ -11,9 +11,10 @@ async function request(endpoint, options = {}) {
   const res = await fetch(`${API_URL}${endpoint}`, { ...options, headers });
   const data = await res.json().catch(() => ({}));
 
-  if (!res.ok) {
-    throw new Error(data.error || 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์');
-  }
+if (!res.ok) {
+  const e = data.error;
+  throw new Error(typeof e === 'string' ? e : e?.message || data.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์');
+}
   return data;
 }
 

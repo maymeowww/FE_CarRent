@@ -36,7 +36,18 @@ export default function Register() {
       }
       navigate('/');
     } catch (err) {
-      setError(err.message || 'สมัครสมาชิกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+      // แกะข้อความ Error ให้อ่านรู้เรื่อง (ป้องกัน [object Object])
+      const errorMsg =
+        typeof err === 'string'
+          ? err
+          : typeof err?.message === 'string'
+          ? err.message
+          : err?.error ||
+            err?.message?.error ||
+            err?.message?.message ||
+            JSON.stringify(err);
+
+      setError(errorMsg || 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
     } finally {
       setLoading(false);
     }
