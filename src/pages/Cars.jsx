@@ -1,8 +1,3 @@
-const register = async (name, email, password) => {
-  await backendApi.register({ name, email, password });
-  return login(email, password); // สมัครเสร็จแล้วล็อกอินต่อเลย
-};
-Jub
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { backendApi } from '../api/backend';
@@ -22,7 +17,7 @@ export default function Cars() {
     setError(null);
     try {
       const data = await backendApi.getCars();
-      // แก้ที่ 1: backend ตอบ { items: [...] } ไม่ใช่ array ตรงๆ
+      // backend ตอบ { items: [...] } ไม่ใช่ array ตรงๆ
       setCars(Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : []);
     } catch (err) {
       setError(err.message || 'Failed to fetch');
@@ -90,7 +85,7 @@ export default function Cars() {
             />
           </div>
 
-          {/* แก้ที่ 2: ค่า type ต้องตรงกับ backend คือ car / motorcycle */}
+          {/* ค่า type ต้องตรงกับ backend คือ car / motorcycle */}
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
