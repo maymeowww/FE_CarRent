@@ -27,10 +27,10 @@ export const backendApi = {
   changePassword: (passwords) => request('/api/change-password', { method: 'PUT', body: JSON.stringify(passwords) }),
 
   // ส่วนของ Guest & Member
-  getCars: () => request('/api/cars'),
+  getCars: async () => (await request('/api/cars')).items || [],
   getCarById: (id) => request(`/api/cars/${id}`),
   createBooking: (bookingData) => request('/api/bookings', { method: 'POST', body: JSON.stringify(bookingData) }),
-  getMyBookings: async () => (await request('/api/bookings/me')).items || [],
+  getMyBookings: () => request('/api/bookings/me'),
   cancelBooking: (id) => request(`/api/bookings/${id}/cancel`, { method: 'PUT' }),
 
   // ส่วนของ Admin

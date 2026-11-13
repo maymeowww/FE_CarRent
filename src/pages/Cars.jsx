@@ -87,14 +87,18 @@ export default function Cars() {
 
           {/* ค่า type ต้องตรงกับ backend คือ car / motorcycle */}
           <select
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
-            className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 font-medium focus:outline-none focus:border-[#1d64f2] sm:w-48"
-          >
-            <option value="ALL">ทุกประเภทรถ</option>
-            <option value="car">รถยนต์</option>
-            <option value="motorcycle">มอเตอร์ไซค์</option>
-          </select>
+  value={selectedType}
+  onChange={(e) => setSelectedType(e.target.value)}
+  className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 font-medium focus:outline-none focus:border-[#1d64f2] sm:w-52"
+>
+  <option value="ALL">ทุกประเภทรถ</option>
+  <option value="car">รถยนต์ทั้งหมด</option>
+  <option value="sedan">รถเก๋ง</option>
+  <option value="suv">SUV และรถตู้</option>
+  <option value="motorcycle">มอเตอร์ไซค์ทั้งหมด</option>
+  <option value="scooter">มอเตอร์ไซค์ออโตเมติก</option>
+  <option value="bigbike">บิ๊กไบค์</option>
+</select>
         </div>
 
         {/* สถานะ 1 : กำลังโหลดข้อมูล */}
