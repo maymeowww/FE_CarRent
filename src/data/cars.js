@@ -1,6 +1,0 @@
-export const cars=[
-{id:'1',brand:'Toyota',model:'Yaris Ativ',year:2023,type:'Sedan',seats:5,gear:'Automatic',price:1200,image:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=900',description:'รถซีดานประหยัดน้ำมัน เหมาะกับการเดินทางในเมือง'},
-{id:'2',brand:'Honda',model:'Civic',year:2022,type:'Sedan',seats:5,gear:'Automatic',price:1800,image:'https://images.unsplash.com/photo-1594070319944-7c0cbebb6f58?w=900',description:'รถซีดานดีไซน์สปอร์ต นั่งสบาย'},
-{id:'3',brand:'Toyota',model:'Fortuner',year:2022,type:'SUV',seats:7,gear:'Automatic',price:2500,image:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=900',description:'SUV 7 ที่นั่ง เหมาะกับครอบครัว'},
-{id:'4',brand:'Mazda',model:'CX-5',year:2023,type:'SUV',seats:5,gear:'Automatic',price:2300,image:'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=900',description:'SUV สำหรับเดินทางไกล'}];
-export const money=n=>new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(n||0);
