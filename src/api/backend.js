@@ -1,5 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
+//ตัวกลางดึงคำสั่ง api จากทุกหน้า
 async function request(endpoint, options = {}) {
   const token = localStorage.getItem('token');
   const headers = {
@@ -8,7 +9,10 @@ async function request(endpoint, options = {}) {
     ...options.headers,
   };
 
+  //การส่งคำขอไปยังเซิร์ฟเวอร์ด้วย fetch
   const res = await fetch(`${API_URL}${endpoint}`, { ...options, headers });
+  
+  //แปลงข้อมูลและการดักจับข้อผิดพลาด
   const data = await res.json().catch(() => ({}));
 
 if (!res.ok) {
